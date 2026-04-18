@@ -29,7 +29,7 @@ export default function NoteList() {
 
     return (
         <div>
-            <NoteEditor note={selected} onSave={() => {setSelected(null); fetchNotes();}}/>
+            <NoteEditor note={lilNote} onSave={() => {setSelected(null); fetchNotes();}}/>
                 {
                     notes.map(note => (
                         <div key={note.id}>
