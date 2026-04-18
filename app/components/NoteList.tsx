@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import NoteEditor from "./NoteEditor";
 
 
-type Note = {id: number, title: string, body: string};
+type Note = {id: number, name: string, body: string};
 
 export default function NoteList() {
     const [notes, setNotes] = useState<Note[]>([]);
@@ -33,7 +33,7 @@ export default function NoteList() {
                 {
                     notes.map(note => (
                         <div key={note.id}>
-                            <h3>{note.title}</h3>
+                            <h3>{note.name}</h3>
                             <p>{note.body}</p>
                             <button onClick={() => setSelected(note)}>Edit</button>
                             <button onClick={() => handleDelete(note.id)}>Delete</button>
