@@ -1,8 +1,12 @@
-import { createClient } from '@/utils/supabase/server';
+import NoteList from "./components/NoteList";
+import ExportButton from "./components/ExportButton";
 
-export default async function Notes() {
-  const supabase = await createClient();
-  const { data: notes } = await supabase.from("notes").select();
-
-  return <pre>{JSON.stringify(notes, null, 2)}</pre>
+export default function Home() {
+  return (
+    <main>
+      <h1>Full Notes List:</h1>
+      <ExportButton />
+      <NoteList />
+    </main>
+  );
 }
