@@ -11,8 +11,16 @@ export default function NoteList() {
     const [selected, setSelected] = useState<Note | null>(null);
 
     const fetchNotes = async() => {
-        const res = await fetch('/api/notes');
-        setNotes(await res.json());
+        try{
+            const res = await fetch('/api/notes');
+            if(!res.ok) throw new Error('Failed to fetch notes');
+            const data = await res.json();
+            setNotes(data);
+        }
+        catch(error){
+            console.error('fetchNotes error:', error);
+            setNotes([]);
+        }
     }
 
     useEffect(() => {
