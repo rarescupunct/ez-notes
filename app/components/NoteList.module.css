@@ -1,0 +1,139 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btnNew {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 34px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btnNew:hover {
+  background: #333;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 0.5px solid #ddd;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 36px;
+  margin-bottom: 20px;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  width: 100%;
+  background: transparent;
+  color: #1a1a1a;
+}
+
+.searchBar input::placeholder {
+  color: #aaa;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: #fff;
+  border: 0.5px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 140px;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cardBody {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+  flex: 1;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 0.5px solid #eee;
+}
+
+.cardDate {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.cardActions {
+  display: flex;
+  gap: 6px;
+}
+
+.iconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  color: #bbb;
+  display: flex;
+  align-items: center;
+}
+
+.iconBtn:hover {
+  color: #666;
+}
+
+.cardNew {
+  background: none;
+  border: 0.5px dashed #ccc;
+  border-radius: 12px;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.cardNew:hover {
+  border-color: #aaa;
+  color: #666;
+}
