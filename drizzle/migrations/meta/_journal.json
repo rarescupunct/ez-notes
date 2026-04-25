@@ -8,6 +8,20 @@
       "when": 1776687936007,
       "tag": "0000_supreme_true_believers",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1777101592904,
+      "tag": "0001_smart_grandmaster",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1777102142233,
+      "tag": "0002_messy_prodigy",
+      "breakpoints": true
     }
   ]
 }

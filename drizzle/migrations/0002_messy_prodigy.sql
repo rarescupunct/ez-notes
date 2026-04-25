@@ -1,0 +1,1 @@
+ALTER TABLE "notes" ALTER COLUMN "body" SET DEFAULT '';
