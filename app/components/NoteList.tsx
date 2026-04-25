@@ -60,6 +60,31 @@ export default function NoteList() {
     n.body?.toLowerCase().includes(search.toLowerCase())
   );
 
+  const handleExport = (note: Note, format: 'json' | 'md') => {
+    let content: string;
+    let filename: string;
+    let type: string;
+    
+    if(format === 'json'){
+        content = JSON.stringify(note, null, 2);
+        filename = `${note.name}.json`;
+        type = 'application/json';
+    }else{
+        content = `# ${note.name}\n\n${note.body ?? ''}`;
+        filename = `${note.name}.md`;
+        type = 'text/markdown';
+    }
+
+    const blob = new Blob([content], { type });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+
   return (
   <div>
     {editorType ? (
@@ -81,7 +106,6 @@ export default function NoteList() {
         <div className={styles.header}>
           <h1 className={styles.title}>Carnetel</h1>
           <div className={styles.actions}>
-            <ExportButton />
             <button className={styles.btnNew} onClick={() => setEditorType('text')}>+ Text</button>
             <button className={styles.btnNew} onClick={() => setEditorType('image')}>+ Image</button>
           </div>
@@ -116,12 +140,26 @@ export default function NoteList() {
                 </span>
                 <div className={styles.cardActions}>
                   {note.type === 'text' && (
-                    <button className={styles.iconBtn} onClick={() => handleEdit(note)} title="Edit">
-                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                        <path d="M2 9.5L9 2.5l1.5 1.5-7 7H2v-1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
-                      </svg>
-                    </button>
-                  )}
+                        <>
+                            <button className={styles.iconBtn} onClick={() => handleEdit(note)} title="Edit">
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                                <path d="M2 9.5L9 2.5l1.5 1.5-7 7H2v-1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                            </svg>
+                            </button>
+                            <button className={styles.iconBtn} onClick={() => handleExport(note, 'json')} title="Export JSON">
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                                <path d="M6.5 1v7M4 6l2.5 2.5L9 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M2 10h9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
+                            </svg>
+                            </button>
+                            <button className={styles.iconBtn} onClick={() => handleExport(note, 'md')} title="Export MD">
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                                <rect x="1" y="3" width="11" height="7" rx="1" stroke="currentColor" strokeWidth="1.2"/>
+                                <path d="M3 8V5l2 2 2-2v3M9 8V5l1 1.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            </button>
+                        </>
+                    )}
                   <button className={styles.iconBtn} onClick={() => handleDelete(note.id)} title="Delete">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                       <path d="M2 3.5h9M5 3.5V2h3v1.5M3.5 3.5v7a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
