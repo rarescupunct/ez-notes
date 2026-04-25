@@ -145,3 +145,26 @@
   border-radius: 8px;
   display: block;
 }
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.btnBack {
+  background: none;
+  border: 0.5px solid #ddd;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 34px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+}
+
+.btnBack:hover {
+  border-color: #aaa;
+  color: #333;
+}

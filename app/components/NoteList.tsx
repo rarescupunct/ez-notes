@@ -61,68 +61,79 @@ export default function NoteList() {
   );
 
   return (
-    <div>
-      <div className={styles.header}>
-        <h1 className={styles.title}>Carnetel</h1>
-        <div className={styles.actions}>
-          <ExportButton />
-          <button className={styles.btnNew} onClick={() => setEditorType('text')}>+ Text</button>
-          <button className={styles.btnNew} onClick={() => setEditorType('image')}>+ Image</button>
+  <div>
+    {editorType ? (
+      <>
+        <div className={styles.editorHeader}>
+          <button className={styles.btnBack} onClick={() => { setEditorType(null); setSelected(null); }}>← Back</button>
+          <h1 className={styles.title}>{selected ? 'Edit note' : 'New note'}</h1>
         </div>
-      </div>
 
-      <div className={styles.searchBar}>
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <circle cx="6" cy="6" r="4.5" stroke="#aaa" strokeWidth="1.2"/>
-          <path d="M9.5 9.5L12 12" stroke="#aaa" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
-        <input
-          type="text"
-          placeholder="Search notes..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </div>
+        {editorType === 'text' && (
+          <NoteEditor selected={selected} onSave={handleSave} onCancel={() => { setEditorType(null); setSelected(null); }} />
+        )}
+        {editorType === 'image' && (
+          <ImageNoteEditor onSave={handleSave} onCancel={() => { setEditorType(null); setSelected(null); }} />
+        )}
+      </>
+    ) : (
+      <>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Carnetel</h1>
+          <div className={styles.actions}>
+            <ExportButton />
+            <button className={styles.btnNew} onClick={() => setEditorType('text')}>+ Text</button>
+            <button className={styles.btnNew} onClick={() => setEditorType('image')}>+ Image</button>
+          </div>
+        </div>
 
-      {editorType === 'text' && (
-        <NoteEditor selected={selected} onSave={handleSave} onCancel={() => setEditorType(null)} />
-      )}
-      {editorType === 'image' && (
-        <ImageNoteEditor onSave={handleSave} onCancel={() => setEditorType(null)} />
-      )}
+        <div className={styles.searchBar}>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <circle cx="6" cy="6" r="4.5" stroke="#aaa" strokeWidth="1.2"/>
+            <path d="M9.5 9.5L12 12" stroke="#aaa" strokeWidth="1.2" strokeLinecap="round"/>
+          </svg>
+          <input
+            type="text"
+            placeholder="Search notes..."
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+          />
+        </div>
 
-      <div className={styles.grid}>
-        {filtered.map(note => (
-          <div key={note.id} className={styles.card}>
-            {note.type === 'image' && note.imageUrl && (
-              <img src={note.imageUrl} alt={note.name} className={styles.cardImage} />
-            )}
-            <div className={styles.cardTitle}>{note.name}</div>
-            {note.type === 'text' && (
-              <div className={styles.cardBody}>{note.body}</div>
-            )}
-            <div className={styles.cardFooter}>
-              <span className={styles.cardDate}>
-                {new Date(note.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-              </span>
-              <div className={styles.cardActions}>
-                {note.type === 'text' && (
-                  <button className={styles.iconBtn} onClick={() => handleEdit(note)} title="Edit">
+        <div className={styles.grid}>
+          {filtered.map(note => (
+            <div key={note.id} className={styles.card}>
+              {note.type === 'image' && note.imageUrl && (
+                <img src={note.imageUrl} alt={note.name} className={styles.cardImage} />
+              )}
+              <div className={styles.cardTitle}>{note.name}</div>
+              {note.type === 'text' && (
+                <div className={styles.cardBody}>{note.body}</div>
+              )}
+              <div className={styles.cardFooter}>
+                <span className={styles.cardDate}>
+                  {new Date(note.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </span>
+                <div className={styles.cardActions}>
+                  {note.type === 'text' && (
+                    <button className={styles.iconBtn} onClick={() => handleEdit(note)} title="Edit">
+                      <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                        <path d="M2 9.5L9 2.5l1.5 1.5-7 7H2v-1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
+                  )}
+                  <button className={styles.iconBtn} onClick={() => handleDelete(note.id)} title="Delete">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                      <path d="M2 9.5L9 2.5l1.5 1.5-7 7H2v-1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                      <path d="M2 3.5h9M5 3.5V2h3v1.5M3.5 3.5v7a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
                     </svg>
                   </button>
-                )}
-                <button className={styles.iconBtn} onClick={() => handleDelete(note.id)} title="Delete">
-                  <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-                    <path d="M2 3.5h9M5 3.5V2h3v1.5M3.5 3.5v7a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                  </svg>
-                </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+          ))}
+        </div>
+      </>
+    )}
+  </div>
+);
 }
