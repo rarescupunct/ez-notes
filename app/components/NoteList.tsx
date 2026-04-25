@@ -160,6 +160,13 @@ export default function NoteList() {
                             </button>
                         </>
                     )}
+                    {note.type === 'image' && (
+                        <button className={styles.iconBtn} onClick={() => handleEdit(note)} title="Edit">
+                            <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                                <path d="M2 9.5L9 2.5l1.5 1.5-7 7H2v-1.5z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round"/>
+                            </svg>
+                            </button>
+                            )}
                   <button className={styles.iconBtn} onClick={() => handleDelete(note.id)} title="Delete">
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
                       <path d="M2 3.5h9M5 3.5V2h3v1.5M3.5 3.5v7a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
