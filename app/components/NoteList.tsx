@@ -59,7 +59,7 @@ export default function NoteList() {
     return (
         <div>
         <div className={styles.header}>
-            <h1 className={styles.title}>My notes</h1>
+            <h1 className={styles.title}>Notebook</h1>
             <div className={styles.actions}>
             <ExportButton />
             <button className={styles.btnNew} onClick={handleNew}>+ New note</button>
